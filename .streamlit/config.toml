@@ -1,0 +1,6 @@
+[server]
+# no first-run email prompt, no auto-open; just print the URL
+headless = true
+
+[browser]
+gatherUsageStats = false
