@@ -58,9 +58,8 @@ every quote it makes, and its own confidence counts for only 35% of the final sc
 ### End-to-end flow
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph BUILD["Build time (once, about 30 s): python -m app.build_index"]
-        direction TB
         D1[("tickets.json<br/>1,800 tickets")] --> R0["Redact PII"]
         D2[("articles.json<br/>36 KB articles")] --> R0
         R0 --> SPL["Split 80 / 20<br/>(test set never indexed)"]
@@ -71,7 +70,6 @@ flowchart LR
     end
 
     subgraph RUN["Run time (every ticket, about 2-3 s)"]
-        direction TB
         T(["New ticket<br/>UI or POST /analyze"]) --> S1["1 · Redact PII"]
         S1 --> S2["2 · Baseline classifier<br/>first guess + probabilities"]
         S2 --> S3["3 · Hybrid search<br/>0.6 semantic + 0.3 BM25 + 0.1 metadata"]
