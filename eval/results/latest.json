@@ -1,0 +1,231 @@
+{
+  "index": {
+    "tickets": 1440,
+    "kb_articles": 36,
+    "backend": "chroma",
+    "embedder": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "semantic": true,
+    "reranker": false,
+    "built_at": "2026-11-17T13:00:25"
+  },
+  "test_size": 360,
+  "weights": {
+    "W_SEM": 0.6,
+    "W_BM25": 0.3,
+    "W_META": 0.1,
+    "C_LLM": 0.35,
+    "C_RET": 0.4,
+    "C_AGR": 0.25,
+    "T_OK": 0.7,
+    "T_ESC": 0.45
+  },
+  "retrieval": {
+    "bm25": {
+      "recall@5": 0.9388888888888889,
+      "precision@5": 0.888888888888889,
+      "mrr@10": 0.9215046296296296,
+      "kb_top1": 0.8638888888888889
+    },
+    "semantic": {
+      "recall@5": 0.9361111111111111,
+      "precision@5": 0.8861111111111111,
+      "mrr@10": 0.9193827160493827,
+      "kb_top1": 0.8277777777777777
+    },
+    "hybrid": {
+      "recall@5": 0.9333333333333333,
+      "precision@5": 0.8894444444444445,
+      "mrr@10": 0.9199570105820106,
+      "kb_top1": 0.8777777777777778
+    }
+  },
+  "traps": {
+    "top1_bm25": 0.85,
+    "top1_semantic": 0.65,
+    "top1_hybrid": 0.8,
+    "baseline_cls": 0.9
+  },
+  "pipeline_baseline": {
+    "n": 360,
+    "category_acc": 0.9444444444444444,
+    "subcategory_acc": 0.9388888888888889,
+    "subcategory_macro_f1": 0.9370380344183089,
+    "priority_acc": 1,
+    "p1_recall": 1,
+    "status": {
+      "NEEDS_REVIEW": 0.9722222222222222,
+      "ESCALATE": 0.027777777777777776
+    },
+    "calibration": {
+      "0.2-0.3": {
+        "n": 1,
+        "acc": 0.0
+      },
+      "0.3-0.4": {
+        "n": 7,
+        "acc": 0.14285714285714285
+      },
+      "0.4-0.5": {
+        "n": 6,
+        "acc": 0.6666666666666666
+      },
+      "0.5-0.6": {
+        "n": 3,
+        "acc": 0.3333333333333333
+      },
+      "0.6-0.7": {
+        "n": 4,
+        "acc": 0.75
+      },
+      "0.7-0.8": {
+        "n": 16,
+        "acc": 1.0
+      },
+      "0.8-0.9": {
+        "n": 133,
+        "acc": 0.9624060150375939
+      },
+      "0.9-1.0": {
+        "n": 190,
+        "acc": 0.9736842105263158
+      }
+    },
+    "paths_with_citation": 1.0,
+    "dropped_claims_per_ticket": 0.0,
+    "degraded_share": 1.0,
+    "latency_p50_ms": 33.51074750025873,
+    "latency_p95_ms": 41.99737000089954,
+    "confusions": [
+      [
+        "Access Request -> How-To",
+        2
+      ],
+      [
+        "Web Application Error -> Software Installation",
+        1
+      ],
+      [
+        "Password Reset -> DB Connection",
+        1
+      ],
+      [
+        "Password Reset -> How-To",
+        1
+      ],
+      [
+        "Web Application Error -> OneDrive/SharePoint Sync",
+        1
+      ],
+      [
+        "Password Reset -> Email/Outlook",
+        1
+      ]
+    ]
+  },
+  "gate_baseline": {
+    "out_of_scope": {
+      "n": 15,
+      "escalate": 0.9333333333333333,
+      "needs_review": 0.06666666666666667,
+      "ok": 0.0
+    },
+    "ambiguous": {
+      "n": 15,
+      "escalate": 0.8666666666666667,
+      "needs_review": 0.13333333333333333,
+      "ok": 0.0
+    }
+  },
+  "pipeline_llm": {
+    "n": 30,
+    "category_acc": 0.9666666666666667,
+    "subcategory_acc": 0.9333333333333333,
+    "subcategory_macro_f1": 0.8974358974358974,
+    "priority_acc": 0.9,
+    "p1_recall": 1,
+    "status": {
+      "OK": 0.8,
+      "NEEDS_REVIEW": 0.2
+    },
+    "calibration": {
+      "0.8-0.9": {
+        "n": 14,
+        "acc": 0.9285714285714286
+      },
+      "0.9-1.0": {
+        "n": 16,
+        "acc": 0.9375
+      }
+    },
+    "paths_with_citation": 1.0,
+    "dropped_claims_per_ticket": 0.03333333333333333,
+    "degraded_share": 0.1,
+    "latency_p50_ms": 11434.724011500293,
+    "latency_p95_ms": 15146.69730300011,
+    "confusions": [
+      [
+        "DB Connection -> Laptop",
+        1
+      ],
+      [
+        "Web Application Error -> Software Installation",
+        1
+      ]
+    ],
+    "model": "openai/gpt-oss-120b"
+  },
+  "pipeline_baseline_same_sample": {
+    "n": 30,
+    "category_acc": 0.9666666666666667,
+    "subcategory_acc": 0.9333333333333333,
+    "subcategory_macro_f1": 0.8974358974358974,
+    "priority_acc": 1,
+    "p1_recall": 1,
+    "status": {
+      "NEEDS_REVIEW": 1.0
+    },
+    "calibration": {
+      "0.7-0.8": {
+        "n": 2,
+        "acc": 1.0
+      },
+      "0.8-0.9": {
+        "n": 15,
+        "acc": 0.9333333333333333
+      },
+      "0.9-1.0": {
+        "n": 13,
+        "acc": 0.9230769230769231
+      }
+    },
+    "paths_with_citation": 1.0,
+    "dropped_claims_per_ticket": 0.0,
+    "degraded_share": 1.0,
+    "latency_p50_ms": 33.62034149995452,
+    "latency_p95_ms": 51.60684299880813,
+    "confusions": [
+      [
+        "DB Connection -> Laptop",
+        1
+      ],
+      [
+        "Web Application Error -> Software Installation",
+        1
+      ]
+    ]
+  },
+  "gate_llm": {
+    "out_of_scope": {
+      "n": 15,
+      "escalate": 1.0,
+      "needs_review": 0.0,
+      "ok": 0.0
+    },
+    "ambiguous": {
+      "n": 15,
+      "escalate": 0.8,
+      "needs_review": 0.13333333333333333,
+      "ok": 0.06666666666666667
+    }
+  }
+}

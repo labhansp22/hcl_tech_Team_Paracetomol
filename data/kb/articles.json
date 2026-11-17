@@ -1,0 +1,866 @@
+[
+ {
+  "kb_id": "KB-0001",
+  "title": "Reset a forgotten or expired password",
+  "category": "Access/Identity",
+  "subcategory": "Password Reset",
+  "symptoms": [
+   "User forgot their password",
+   "Password expired and login is refused",
+   "Error 'The password is incorrect' after a recent change"
+  ],
+  "diagnostic_steps": [
+   "Confirm the user's identity with the employee verification questions",
+   "Check in Active Directory whether the password has expired or the account is locked",
+   "Check whether the user changed the password recently on another device"
+  ],
+  "resolution_steps": [
+   "Ask the user to reset the password at the self-service portal https://reset.corp.example",
+   "If self-service is not enrolled, reset the password in Active Directory and tick 'User must change password at next logon'",
+   "Tell the user to sign out of all devices and sign in again with the new password",
+   "Update the saved password on the phone mail app to stop repeated failed logins"
+  ],
+  "escalation_criteria": "Escalate to Identity & Access Management if identity cannot be verified or the reset fails twice.",
+  "assignment_group": "Identity & Access Management"
+ },
+ {
+  "kb_id": "KB-0002",
+  "title": "Unlock an account locked after failed sign-ins",
+  "category": "Access/Identity",
+  "subcategory": "Account Lockout",
+  "symptoms": [
+   "Error 'Your account has been locked'",
+   "User locked out repeatedly every few minutes",
+   "Login fails on all applications at the same time"
+  ],
+  "diagnostic_steps": [
+   "Check the lockout source in the Account Lockout Status tool",
+   "Look for an old password saved on a phone, mapped drive or scheduled task",
+   "Confirm the lockouts are not from an unknown IP address (possible attack)"
+  ],
+  "resolution_steps": [
+   "Unlock the account in Active Directory Users and Computers",
+   "Remove saved credentials from Windows Credential Manager on the user's laptop",
+   "Update or remove the old password on mobile devices that sync email",
+   "Monitor the account for 30 minutes to confirm it does not lock again"
+  ],
+  "escalation_criteria": "Escalate to the Security Operations Center if lockouts come from unknown IP addresses or countries.",
+  "assignment_group": "Identity & Access Management"
+ },
+ {
+  "kb_id": "KB-0003",
+  "title": "Fix multi-factor authentication (MFA) prompts that fail or never arrive",
+  "category": "Access/Identity",
+  "subcategory": "MFA Issue",
+  "symptoms": [
+   "Authenticator push notification does not arrive",
+   "MFA code is rejected as invalid",
+   "User changed phone and lost the authenticator app"
+  ],
+  "diagnostic_steps": [
+   "Check the user's registered MFA methods in the identity portal",
+   "Confirm the phone's date and time are set automatically",
+   "Check whether the user recently replaced or reset their phone"
+  ],
+  "resolution_steps": [
+   "Ask the user to enable automatic date and time on the phone and retry the code",
+   "Re-register the authenticator app by removing the old device and scanning a new QR code",
+   "Issue a temporary access pass valid for 8 hours if the user has no working method",
+   "Ask the user to register a backup method such as SMS"
+  ],
+  "escalation_criteria": "Escalate to Identity & Access Management if MFA fails for many users at once (possible service issue).",
+  "assignment_group": "Identity & Access Management"
+ },
+ {
+  "kb_id": "KB-0004",
+  "title": "Grant access to an application, shared folder or group",
+  "category": "Access/Identity",
+  "subcategory": "Access Request",
+  "symptoms": [
+   "Error 'Access denied' or 'You don't have permission'",
+   "New joiner cannot open a team folder",
+   "User needs a new role in an application"
+  ],
+  "diagnostic_steps": [
+   "Confirm which resource and which access level are needed",
+   "Check that a manager approval exists in the access request form",
+   "Check the user's current group memberships"
+  ],
+  "resolution_steps": [
+   "Raise an access request in the identity portal with the resource and access level",
+   "Wait for the resource owner's approval before granting access",
+   "Add the user to the approved security group",
+   "Ask the user to sign out and sign in again so the new group membership applies"
+  ],
+  "escalation_criteria": "Escalate to the resource owner if no approval arrives within 2 business days.",
+  "assignment_group": "Identity & Access Management"
+ },
+ {
+  "kb_id": "KB-0005",
+  "title": "VPN client cannot connect",
+  "category": "Network",
+  "subcategory": "VPN",
+  "symptoms": [
+   "GlobalProtect stuck on 'Connecting'",
+   "VPN error 809 or 'gateway unreachable'",
+   "VPN connects but internal sites do not open"
+  ],
+  "diagnostic_steps": [
+   "Check the user's internet connection without VPN",
+   "Check the VPN client version and whether the certificate has expired",
+   "Check the VPN gateway status page for an ongoing outage"
+  ],
+  "resolution_steps": [
+   "Disconnect and reconnect the VPN, choosing the nearest gateway",
+   "Restart the PanGPS service or reboot the laptop",
+   "Update the VPN client to the latest approved version from the Software Center",
+   "Re-import the machine certificate if the client reports an expired certificate"
+  ],
+  "escalation_criteria": "Escalate to Network Operations if several users report the same gateway failing.",
+  "assignment_group": "Network Operations"
+ },
+ {
+  "kb_id": "KB-0006",
+  "title": "VPN disconnects frequently or is very slow",
+  "category": "Network",
+  "subcategory": "VPN",
+  "symptoms": [
+   "VPN drops every few minutes",
+   "Very slow file transfers over VPN",
+   "Video calls freeze only when VPN is on"
+  ],
+  "diagnostic_steps": [
+   "Run a speed test with and without VPN",
+   "Check whether the home router or Wi-Fi signal is weak",
+   "Check whether split tunnelling is enabled for video calls"
+  ],
+  "resolution_steps": [
+   "Connect the laptop to the router with a cable or move closer to the Wi-Fi access point",
+   "Switch to the nearest VPN gateway in the client settings",
+   "Turn off other VPN or proxy software running at the same time",
+   "Restart the home router if the speed test without VPN is also slow"
+  ],
+  "escalation_criteria": "Escalate to Network Operations if the gateway shows packet loss for many users.",
+  "assignment_group": "Network Operations"
+ },
+ {
+  "kb_id": "KB-0007",
+  "title": "Cannot connect to office Wi-Fi",
+  "category": "Network",
+  "subcategory": "WiFi",
+  "symptoms": [
+   "Laptop does not see the CORP-WIFI network",
+   "Wi-Fi connected but no internet",
+   "Wi-Fi asks for credentials again and again"
+  ],
+  "diagnostic_steps": [
+   "Check whether other devices nearby can connect",
+   "Check whether the laptop's machine certificate is valid",
+   "Check the access point status in the wireless controller"
+  ],
+  "resolution_steps": [
+   "Forget the CORP-WIFI network and connect again",
+   "Turn the Wi-Fi adapter off and on, or toggle airplane mode",
+   "Update the Wi-Fi driver from the Software Center",
+   "Run gpupdate /force to refresh the wireless profile and certificate"
+  ],
+  "escalation_criteria": "Escalate to Network Operations if a whole floor or site has no Wi-Fi.",
+  "assignment_group": "Network Operations"
+ },
+ {
+  "kb_id": "KB-0008",
+  "title": "Websites or internal servers do not resolve (DNS or connectivity)",
+  "category": "Network",
+  "subcategory": "DNS/Connectivity",
+  "symptoms": [
+   "Error 'DNS_PROBE_FINISHED_NXDOMAIN'",
+   "Internal site opens by IP address but not by name",
+   "Network drive shows 'path not found'"
+  ],
+  "diagnostic_steps": [
+   "Run nslookup for the failing host name",
+   "Ping the server by IP address to separate DNS from connectivity",
+   "Check whether the laptop received the correct DNS servers with ipconfig /all"
+  ],
+  "resolution_steps": [
+   "Run ipconfig /flushdns and then ipconfig /renew",
+   "Reconnect to the network or VPN to receive the correct DNS servers",
+   "Remove any manually set DNS server from the network adapter settings",
+   "Remap the network drive using the full server name"
+  ],
+  "escalation_criteria": "Escalate to Network Operations if nslookup fails for all users or the DNS server does not respond.",
+  "assignment_group": "Network Operations"
+ },
+ {
+  "kb_id": "KB-0009",
+  "title": "Website blocked by proxy or firewall",
+  "category": "Network",
+  "subcategory": "Proxy/Firewall",
+  "symptoms": [
+   "Page shows 'Blocked by corporate policy'",
+   "Proxy authentication prompt keeps appearing",
+   "Connection to an external partner system times out"
+  ],
+  "diagnostic_steps": [
+   "Check the block page for the category and rule name",
+   "Check whether the site is needed for business and who owns the request",
+   "Test the connection from another network to confirm a firewall block"
+  ],
+  "resolution_steps": [
+   "Ask the user for the business reason and the full URL",
+   "Raise a firewall or proxy exception request with the URL, port and business owner",
+   "Clear the browser cache and restart the browser after the exception is applied",
+   "Re-enter the proxy credentials if the authentication prompt keeps appearing"
+  ],
+  "escalation_criteria": "Escalate to Network Security if the request involves opening inbound ports or an unknown destination.",
+  "assignment_group": "Network Operations"
+ },
+ {
+  "kb_id": "KB-0010",
+  "title": "Laptop is slow, freezes or overheats",
+  "category": "Hardware",
+  "subcategory": "Laptop",
+  "symptoms": [
+   "Laptop takes over 10 minutes to start",
+   "Fan is loud and the laptop is hot",
+   "Applications freeze and the disk is at 100%"
+  ],
+  "diagnostic_steps": [
+   "Check CPU, memory and disk usage in Task Manager",
+   "Check free disk space on drive C",
+   "Run the manufacturer's hardware diagnostics"
+  ],
+  "resolution_steps": [
+   "Restart the laptop and install pending Windows updates",
+   "Free up disk space by clearing temporary files with Disk Cleanup",
+   "Disable unnecessary startup programs in Task Manager",
+   "Raise a hardware replacement if the diagnostics report a failing disk or battery"
+  ],
+  "escalation_criteria": "Escalate to End-User Computing if diagnostics report a hardware fault.",
+  "assignment_group": "End-User Computing"
+ },
+ {
+  "kb_id": "KB-0011",
+  "title": "Laptop does not power on, no display or blue screen",
+  "category": "Hardware",
+  "subcategory": "Laptop",
+  "symptoms": [
+   "Laptop does not turn on",
+   "Black screen after the logo",
+   "Blue screen error such as CRITICAL_PROCESS_DIED"
+  ],
+  "diagnostic_steps": [
+   "Check whether the charger light is on",
+   "Connect an external monitor to check the display",
+   "Note the blue screen stop code"
+  ],
+  "resolution_steps": [
+   "Hold the power button for 30 seconds to drain residual power, then start again",
+   "Try a different charger to rule out a faulty adapter",
+   "Boot into Safe Mode and remove the most recently installed driver or update",
+   "Book a loaner laptop and a hardware repair if the laptop still does not start"
+  ],
+  "escalation_criteria": "Escalate to End-User Computing for any physical damage or repeated blue screens.",
+  "assignment_group": "End-User Computing"
+ },
+ {
+  "kb_id": "KB-0012",
+  "title": "Printer not printing or jobs stuck in the queue",
+  "category": "Hardware",
+  "subcategory": "Printer",
+  "symptoms": [
+   "Print jobs stay in the queue",
+   "Printer shows offline",
+   "Paper jam or 'toner low' message"
+  ],
+  "diagnostic_steps": [
+   "Check the printer's display panel for errors",
+   "Check whether other users can print to the same printer",
+   "Check the print queue on the print server"
+  ],
+  "resolution_steps": [
+   "Clear the print queue and restart the Print Spooler service",
+   "Remove the printer and add it again from the print server",
+   "Clear any paper jam following the printer panel instructions",
+   "Reinstall the printer driver from the Software Center"
+  ],
+  "escalation_criteria": "Escalate to End-User Computing for hardware faults or if a whole floor cannot print.",
+  "assignment_group": "End-User Computing"
+ },
+ {
+  "kb_id": "KB-0013",
+  "title": "Monitor, docking station, keyboard or mouse not working",
+  "category": "Hardware",
+  "subcategory": "Peripheral",
+  "symptoms": [
+   "External monitor shows 'no signal'",
+   "Docking station does not detect devices",
+   "Keyboard or mouse stops responding"
+  ],
+  "diagnostic_steps": [
+   "Check the cables and try another port",
+   "Test the device on another computer",
+   "Check the docking station firmware version"
+  ],
+  "resolution_steps": [
+   "Disconnect the docking station, wait 10 seconds and connect it again",
+   "Update the docking station firmware and display driver from the Software Center",
+   "Press Windows+P and select Extend to detect the external monitor",
+   "Replace the batteries or receiver of wireless devices"
+  ],
+  "escalation_criteria": "Escalate to End-User Computing for a replacement if the device fails on another computer.",
+  "assignment_group": "End-User Computing"
+ },
+ {
+  "kb_id": "KB-0014",
+  "title": "Outlook does not open, crashes or freezes",
+  "category": "Software/Application",
+  "subcategory": "Email/Outlook",
+  "symptoms": [
+   "Outlook stuck on 'Loading profile'",
+   "Outlook crashes when opening attachments",
+   "Outlook is not responding"
+  ],
+  "diagnostic_steps": [
+   "Start Outlook in safe mode with outlook.exe /safe",
+   "Check whether a recent add-in was installed",
+   "Check the size of the OST file"
+  ],
+  "resolution_steps": [
+   "Start Outlook in safe mode and disable recently added add-ins",
+   "Run the Office repair from Apps and Features",
+   "Rename the OST file so Outlook rebuilds it on the next start",
+   "Create a new Outlook profile if the problem continues"
+  ],
+  "escalation_criteria": "Escalate to the Messaging Team if the mailbox is not reachable from Outlook on the web either.",
+  "assignment_group": "Messaging Team"
+ },
+ {
+  "kb_id": "KB-0015",
+  "title": "Emails not sending, not receiving or mailbox full",
+  "category": "Software/Application",
+  "subcategory": "Email/Outlook",
+  "symptoms": [
+   "Emails stuck in the Outbox",
+   "Not receiving external emails",
+   "Warning 'Your mailbox is almost full'"
+  ],
+  "diagnostic_steps": [
+   "Check the mailbox size and quota",
+   "Check whether Outlook on the web shows the same problem",
+   "Run a message trace for the missing email"
+  ],
+  "resolution_steps": [
+   "Empty Deleted Items and archive old emails to reduce mailbox size",
+   "Remove large attachments from the Outbox and send again",
+   "Check the Junk folder and blocked senders list for missing emails",
+   "Enable online archiving for the mailbox if the quota is reached often"
+  ],
+  "escalation_criteria": "Escalate to the Messaging Team if the message trace shows rejected or delayed delivery.",
+  "assignment_group": "Messaging Team"
+ },
+ {
+  "kb_id": "KB-0016",
+  "title": "SAP GUI login fails or transactions error",
+  "category": "Software/Application",
+  "subcategory": "SAP",
+  "symptoms": [
+   "SAP GUI error 'Partner not reached'",
+   "SAP logon fails with 'user locked'",
+   "Transaction ends with a short dump"
+  ],
+  "diagnostic_steps": [
+   "Check whether the SAP system is up on the SAP status page",
+   "Check the SAP user status in transaction SU01",
+   "Note the transaction code and short dump ID from ST22"
+  ],
+  "resolution_steps": [
+   "Clear the SAP GUI cache and restart SAP Logon",
+   "Unlock the SAP user in SU01 and reset the password if required",
+   "Check that the correct system entry is selected in SAP Logon",
+   "Send the short dump ID from ST22 to SAP Basis for analysis"
+  ],
+  "escalation_criteria": "Escalate to SAP Basis if the system is down or many users get the same short dump.",
+  "assignment_group": "SAP Basis"
+ },
+ {
+  "kb_id": "KB-0017",
+  "title": "Install or update approved software",
+  "category": "Software/Application",
+  "subcategory": "Software Installation",
+  "symptoms": [
+   "User needs a new application installed",
+   "Installation fails with 'administrator rights required'",
+   "Software Center install stuck at 0%"
+  ],
+  "diagnostic_steps": [
+   "Check whether the software is in the approved software catalogue",
+   "Check the Software Center installation log",
+   "Check free disk space and pending restarts"
+  ],
+  "resolution_steps": [
+   "Install the application from the Software Center if it is in the catalogue",
+   "Restart the laptop to finish pending updates and retry the installation",
+   "Raise a software request with manager approval if the application is not in the catalogue",
+   "Clear the Software Center cache if the installation is stuck"
+  ],
+  "escalation_criteria": "Escalate to Desktop Engineering if the package fails on several laptops.",
+  "assignment_group": "Desktop Engineering"
+ },
+ {
+  "kb_id": "KB-0018",
+  "title": "Business application crashes or shows an error",
+  "category": "Software/Application",
+  "subcategory": "Application Crash",
+  "symptoms": [
+   "Application closes unexpectedly",
+   "Error 'Application has stopped working'",
+   "Application hangs after a recent update"
+  ],
+  "diagnostic_steps": [
+   "Collect the exact error message and a screenshot",
+   "Check the Windows Event Viewer application log for the crash",
+   "Check whether the crash started after an update"
+  ],
+  "resolution_steps": [
+   "Restart the application and clear its local cache",
+   "Repair or reinstall the application from the Software Center",
+   "Roll back the most recent update if the crash started after it",
+   "Send the Event Viewer logs to Application Support"
+  ],
+  "escalation_criteria": "Escalate to Application Support if the crash affects many users or a production business process.",
+  "assignment_group": "Application Support"
+ },
+ {
+  "kb_id": "KB-0019",
+  "title": "Microsoft Teams calls or meetings not working",
+  "category": "Software/Application",
+  "subcategory": "Application Crash",
+  "symptoms": [
+   "Teams shows a white screen",
+   "Others cannot hear the user in Teams calls",
+   "Teams keeps crashing on start"
+  ],
+  "diagnostic_steps": [
+   "Check whether Teams on the web works",
+   "Check the selected microphone and speaker in Teams device settings",
+   "Check the Teams version"
+  ],
+  "resolution_steps": [
+   "Quit Teams completely and clear the Teams cache folder",
+   "Select the correct microphone and speaker in Teams device settings",
+   "Update Teams to the latest version",
+   "Use Teams on the web as a workaround while the desktop app is fixed"
+  ],
+  "escalation_criteria": "Escalate to Application Support if Teams on the web also fails.",
+  "assignment_group": "Application Support"
+ },
+ {
+  "kb_id": "KB-0020",
+  "title": "Database queries slow or timing out",
+  "category": "Database",
+  "subcategory": "DB Performance",
+  "symptoms": [
+   "Reports take much longer than usual",
+   "Query timeout errors in the application",
+   "High CPU on the database server"
+  ],
+  "diagnostic_steps": [
+   "Find long-running and blocking sessions on the database",
+   "Check CPU, memory and disk I/O on the database server",
+   "Review the execution plan of the slow query"
+  ],
+  "resolution_steps": [
+   "Identify blocking sessions and ask the owner before ending them",
+   "Update table statistics and rebuild fragmented indexes",
+   "Add a missing index suggested by the execution plan after testing in UAT",
+   "Schedule heavy reports outside business hours"
+  ],
+  "escalation_criteria": "Escalate to the DBA Team if production performance affects many users.",
+  "assignment_group": "DBA Team"
+ },
+ {
+  "kb_id": "KB-0021",
+  "title": "Application cannot connect to the database",
+  "category": "Database",
+  "subcategory": "DB Connection",
+  "symptoms": [
+   "Error 'ORA-12541: TNS:no listener'",
+   "Error 'Login failed for user'",
+   "Connection pool exhausted errors"
+  ],
+  "diagnostic_steps": [
+   "Check whether the database service and listener are running",
+   "Test the connection from the application server",
+   "Check whether the database account is locked or its password expired"
+  ],
+  "resolution_steps": [
+   "Restart the database listener if it is not running",
+   "Unlock the service account or update its rotated password in the application configuration",
+   "Increase the connection pool size or fix connections that are not closed",
+   "Check firewall rules between the application server and the database port"
+  ],
+  "escalation_criteria": "Escalate to the DBA Team immediately if a production database is unreachable.",
+  "assignment_group": "DBA Team"
+ },
+ {
+  "kb_id": "KB-0022",
+  "title": "Database backup failed or a restore is needed",
+  "category": "Database",
+  "subcategory": "Backup/Restore",
+  "symptoms": [
+   "Nightly backup job failed",
+   "Backup disk is full",
+   "User needs data restored to an earlier point in time"
+  ],
+  "diagnostic_steps": [
+   "Check the backup job history and error message",
+   "Check free space on the backup target",
+   "Confirm the restore point and the approval from the data owner"
+  ],
+  "resolution_steps": [
+   "Free space on the backup target and rerun the backup job",
+   "Verify the latest successful backup with a restore test",
+   "Restore the database to a separate instance first for the requested point in time",
+   "Get data owner sign-off before replacing production data"
+  ],
+  "escalation_criteria": "Escalate to the DBA Team if two backups in a row fail.",
+  "assignment_group": "DBA Team"
+ },
+ {
+  "kb_id": "KB-0023",
+  "title": "How-to requests and general IT questions",
+  "category": "Inquiry",
+  "subcategory": "How-To",
+  "symptoms": [
+   "User asks how to set up an out-of-office reply",
+   "User asks how to map a network drive",
+   "User asks how to share a file securely"
+  ],
+  "diagnostic_steps": [
+   "Identify the task the user wants to do",
+   "Check the self-help portal for an existing guide",
+   "Confirm the user's device and operating system"
+  ],
+  "resolution_steps": [
+   "Send the user the matching guide from the self-help portal",
+   "Walk the user through the steps on a short call if needed",
+   "Confirm the user can complete the task alone",
+   "Suggest a new self-help article if no guide exists"
+  ],
+  "escalation_criteria": "No escalation needed unless the request turns into a fault.",
+  "assignment_group": "Service Desk L1"
+ },
+ {
+  "kb_id": "KB-0024",
+  "title": "Request a software licence",
+  "category": "Inquiry",
+  "subcategory": "License Request",
+  "symptoms": [
+   "User needs a licence for Visio, Project or Adobe",
+   "Application says 'licence expired'",
+   "Trial version ended"
+  ],
+  "diagnostic_steps": [
+   "Check whether a free licence is available in the licence pool",
+   "Check that the user's manager has approved the cost",
+   "Check the licence assignment in the admin portal"
+  ],
+  "resolution_steps": [
+   "Raise a licence request in the service portal with manager approval",
+   "Assign a free licence from the pool if one is available",
+   "Ask the user to sign out and sign in to the application to activate the licence",
+   "Remove licences from leavers to free them for new requests"
+  ],
+  "escalation_criteria": "Escalate to Software Asset Management if no licence is available in the pool.",
+  "assignment_group": "Software Asset Management"
+ },
+ {
+  "kb_id": "KB-0025",
+  "title": "Company phone: email not syncing, enrolment fails or device not compliant",
+  "category": "Hardware",
+  "subcategory": "Mobile Device",
+  "symptoms": [
+   "Email or Teams stopped syncing on the company phone",
+   "Phone cannot be enrolled in the Intune Company Portal",
+   "Phone shows 'not compliant' and company apps are blocked"
+  ],
+  "diagnostic_steps": [
+   "Check the device record in Intune for compliance status and last check-in time",
+   "Confirm the phone runs the minimum supported OS version",
+   "Check whether the user's licence includes mobile device management"
+  ],
+  "resolution_steps": [
+   "Open the Company Portal app and tap Check status to force a compliance check",
+   "Install pending OS updates and restart the phone",
+   "Remove and re-add the work account in the Outlook mobile app",
+   "If enrolment still fails, retire the old device record in Intune and enrol the phone again"
+  ],
+  "escalation_criteria": "Escalate to Mobile Device Management if the device stays non-compliant after an update and re-enrolment.",
+  "assignment_group": "Mobile Device Management"
+ },
+ {
+  "kb_id": "KB-0026",
+  "title": "Lost or stolen company phone",
+  "category": "Hardware",
+  "subcategory": "Mobile Device",
+  "symptoms": [
+   "User lost the company phone",
+   "Company phone was stolen",
+   "Phone with company email is missing"
+  ],
+  "diagnostic_steps": [
+   "Confirm the user's identity and the device in Intune",
+   "Ask when and where the phone was last seen",
+   "Check whether the phone was used to sign in after it went missing"
+  ],
+  "resolution_steps": [
+   "Send a remote wipe of company data from Intune",
+   "Revoke the user's active sessions and require MFA re-registration",
+   "Block the SIM with the mobile carrier",
+   "Order a replacement phone through the hardware request form"
+  ],
+  "escalation_criteria": "Escalate to Security Operations if the phone was used to sign in after it was lost.",
+  "assignment_group": "Mobile Device Management"
+ },
+ {
+  "kb_id": "KB-0027",
+  "title": "OneDrive or SharePoint files not syncing",
+  "category": "Software/Application",
+  "subcategory": "OneDrive/SharePoint Sync",
+  "symptoms": [
+   "OneDrive files show a red cross or are stuck syncing",
+   "Duplicate files appear with the computer name added",
+   "A synced SharePoint library stopped updating"
+  ],
+  "diagnostic_steps": [
+   "Open the OneDrive icon in the taskbar and read the sync error",
+   "Check whether the user's OneDrive storage is full",
+   "Check for file names with unsupported characters or paths longer than 400 characters"
+  ],
+  "resolution_steps": [
+   "Pause and resume syncing from the OneDrive icon",
+   "Rename files with unsupported characters and shorten long paths",
+   "Free OneDrive space by removing old files or making them online-only",
+   "Reset OneDrive with onedrive.exe /reset and sign in again"
+  ],
+  "escalation_criteria": "Escalate to Collaboration Services if files are missing after sync or the reset does not fix it.",
+  "assignment_group": "Collaboration Services"
+ },
+ {
+  "kb_id": "KB-0028",
+  "title": "Suspicious or phishing email reported",
+  "category": "Security",
+  "subcategory": "Phishing",
+  "symptoms": [
+   "Email asks the user to confirm a password through a link",
+   "Unexpected invoice or attachment from an unknown sender",
+   "Email pretends to be from a manager or executive and asks for money or gift cards"
+  ],
+  "diagnostic_steps": [
+   "Ask whether the user clicked a link, opened an attachment or entered a password",
+   "Check the sender address and message headers",
+   "Search the mail system for the same message sent to other users"
+  ],
+  "resolution_steps": [
+   "Ask the user to report the email with the Report Phishing button and then delete it",
+   "If a password was entered, reset it immediately and revoke active sessions",
+   "Remove the same message from all mailboxes with a mail purge",
+   "Block the sender domain and the linked URL"
+  ],
+  "escalation_criteria": "Escalate to Security Operations at once if credentials were entered, an attachment was opened, or many users received it.",
+  "assignment_group": "Security Operations"
+ },
+ {
+  "kb_id": "KB-0029",
+  "title": "Antivirus alert, malware or suspected ransomware",
+  "category": "Security",
+  "subcategory": "Malware/Antivirus",
+  "symptoms": [
+   "Microsoft Defender shows a threat detected alert",
+   "Unknown programs, pop-ups or browser redirects",
+   "Files have strange extensions or a ransom note appears"
+  ],
+  "diagnostic_steps": [
+   "Check the Defender alert name and the affected file path",
+   "Ask whether the user opened an attachment or plugged in a USB device",
+   "Check whether other devices show the same alert"
+  ],
+  "resolution_steps": [
+   "Disconnect the laptop from the network and VPN immediately",
+   "Run a full Microsoft Defender scan and quarantine detected items",
+   "Do not pay any ransom and do not delete the ransom note",
+   "Reimage the laptop if the threat cannot be removed and restore files from backup"
+  ],
+  "escalation_criteria": "Escalate to Security Operations immediately for ransomware, repeated detections or more than one affected device.",
+  "assignment_group": "Security Operations"
+ },
+ {
+  "kb_id": "KB-0030",
+  "title": "Server or file share running out of disk space",
+  "category": "Infrastructure",
+  "subcategory": "Server/Storage",
+  "symptoms": [
+   "Server disk above 90% full",
+   "Application stops writing logs or files",
+   "Users cannot save files to the department share"
+  ],
+  "diagnostic_steps": [
+   "Check disk usage per volume in the monitoring tool",
+   "Find the largest folders and recently grown files",
+   "Check whether log rotation and cleanup jobs are running"
+  ],
+  "resolution_steps": [
+   "Delete or archive old log files and temporary files",
+   "Enable log rotation for the application",
+   "Move old data to archive storage",
+   "Request a disk extension through a change request if usage is still above 85%"
+  ],
+  "escalation_criteria": "Escalate to Infrastructure Operations if the disk cannot be brought below 85% or a production service has stopped.",
+  "assignment_group": "Infrastructure Operations"
+ },
+ {
+  "kb_id": "KB-0031",
+  "title": "Server or VM not responding",
+  "category": "Infrastructure",
+  "subcategory": "Server/Storage",
+  "symptoms": [
+   "Server does not answer ping or RDP",
+   "VM is powered off and will not start",
+   "Server memory or CPU at 100% and services keep restarting"
+  ],
+  "diagnostic_steps": [
+   "Check the server status in the virtualisation console",
+   "Check the monitoring tool for CPU, memory and disk alerts before the failure",
+   "Check whether a patch or change ran on the server recently"
+  ],
+  "resolution_steps": [
+   "Open the VM console and check whether the operating system is responsive",
+   "Restart the hung service or reboot the server in an approved window",
+   "Start the VM and review the boot error if it fails to start",
+   "Roll back the most recent change if the problem started after it"
+  ],
+  "escalation_criteria": "Escalate to Infrastructure Operations if a production server cannot be recovered within 30 minutes.",
+  "assignment_group": "Infrastructure Operations"
+ },
+ {
+  "kb_id": "KB-0032",
+  "title": "Internal web application shows HTTP 500, 502 or a sign-in loop",
+  "category": "Software/Application",
+  "subcategory": "Web Application Error",
+  "symptoms": [
+   "Page shows HTTP 500 Internal Server Error",
+   "Page shows 502 Bad Gateway or service unavailable",
+   "Application keeps redirecting back to the sign-in page"
+  ],
+  "diagnostic_steps": [
+   "Check whether other users see the same error",
+   "Check the application status page and recent deployments",
+   "Ask the user for the error ID and the time it happened"
+  ],
+  "resolution_steps": [
+   "Ask the user to clear browser cookies for the site and sign in again",
+   "Try a private browser window to rule out a cached session",
+   "Restart the application pool or service if the error affects all users",
+   "Send the error ID and time to the application team for log analysis"
+  ],
+  "escalation_criteria": "Escalate to Application Support if many users are affected or the error continues after a restart.",
+  "assignment_group": "Application Support"
+ },
+ {
+  "kb_id": "KB-0033",
+  "title": "Repeated account lockouts caused by saved old passwords",
+  "category": "Access/Identity",
+  "subcategory": "Account Lockout",
+  "symptoms": [
+   "Account locks again minutes after being unlocked",
+   "Lockouts started after a password change",
+   "Lockouts happen even when the user is not signing in"
+  ],
+  "diagnostic_steps": [
+   "Find the lockout source computer in the domain controller security log",
+   "Check the phone mail app and other devices for saved old passwords",
+   "Check mapped drives and scheduled tasks that use the user's credentials"
+  ],
+  "resolution_steps": [
+   "Update or remove the old password on the phone mail app",
+   "Clear saved credentials in Windows Credential Manager",
+   "Disconnect and remap network drives with the new password",
+   "Unlock the account once all sources are fixed"
+  ],
+  "escalation_criteria": "Escalate to Identity & Access Management if the lockout source cannot be found.",
+  "assignment_group": "Identity & Access Management"
+ },
+ {
+  "kb_id": "KB-0034",
+  "title": "Add a printer or fix a failed printer driver installation",
+  "category": "Hardware",
+  "subcategory": "Printer",
+  "symptoms": [
+   "Cannot add the printer from the print server",
+   "Printer driver installation fails",
+   "Printer shows offline on the laptop although it is on"
+  ],
+  "diagnostic_steps": [
+   "Check that the laptop can reach the print server",
+   "Check whether the printer driver is approved and available on the print server",
+   "Check whether the printer was renamed or moved to another print server"
+  ],
+  "resolution_steps": [
+   "Remove the old printer from Settings and add it again from the print server",
+   "Install the approved driver from the Software Center",
+   "Restart the Print Spooler service on the laptop",
+   "Set the printer as default and print a test page"
+  ],
+  "escalation_criteria": "Escalate to End-User Computing if the driver fails to install from the Software Center.",
+  "assignment_group": "End-User Computing"
+ },
+ {
+  "kb_id": "KB-0035",
+  "title": "SAP short dump or slow SAP transactions",
+  "category": "Software/Application",
+  "subcategory": "SAP",
+  "symptoms": [
+   "Transaction ends with a short dump",
+   "SAP transactions are very slow or time out",
+   "Posting fails with a runtime error"
+  ],
+  "diagnostic_steps": [
+   "Look up the short dump in transaction ST22",
+   "Check work process usage in transaction SM50",
+   "Check whether a transport or batch job ran just before the problem"
+  ],
+  "resolution_steps": [
+   "Send the short dump ID from ST22 to SAP Basis",
+   "Ask the user to retry the transaction after the batch job finishes",
+   "End long-running work processes only after the owner agrees",
+   "Apply the SAP note named in the dump if one is listed"
+  ],
+  "escalation_criteria": "Escalate to SAP Basis if many users are affected or the dump repeats after a retry.",
+  "assignment_group": "SAP Basis"
+ },
+ {
+  "kb_id": "KB-0036",
+  "title": "Wi-Fi keeps dropping or is connected with no internet",
+  "category": "Network",
+  "subcategory": "WiFi",
+  "symptoms": [
+   "Wireless connection drops every few minutes",
+   "Wi-Fi is connected but there is no internet",
+   "Wi-Fi is weak in meeting rooms"
+  ],
+  "diagnostic_steps": [
+   "Check whether other users in the same area have the same problem",
+   "Check the access point status for that floor in the wireless controller",
+   "Check whether the laptop wireless driver is up to date"
+  ],
+  "resolution_steps": [
+   "Turn Wi-Fi off and on and reconnect to CORP-WIFI",
+   "Update the wireless network driver from the Software Center",
+   "Disable power saving for the wireless adapter in Device Manager",
+   "Report the floor and room to Network Operations if several users are affected"
+  ],
+  "escalation_criteria": "Escalate to Network Operations if an access point is down or a whole floor is affected.",
+  "assignment_group": "Network Operations"
+ }
+]
